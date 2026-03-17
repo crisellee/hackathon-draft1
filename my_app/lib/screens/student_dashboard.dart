@@ -3,8 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../models/concern.dart';
 import '../services/concern_service.dart';
+<<<<<<< HEAD
 import '../services/providers.dart';
 import 'concern_detail_screen.dart';
+=======
+import 'login_screen.dart';
+>>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
 
 
 final studentConcernsProvider = StreamProvider.family<List<Concern>, String>((ref, studentId) {
@@ -63,6 +67,7 @@ class StudentDashboard extends ConsumerWidget {
                         const SizedBox(height: 8),
                         Text('Submitted on: ${DateFormat('MMM dd, yyyy HH:mm').format(concern.createdAt)}'),
                         const Divider(),
+<<<<<<< HEAD
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -85,6 +90,9 @@ class StudentDashboard extends ConsumerWidget {
                             ),
                           ],
                         ),
+=======
+                        const Text('Progress Timeline:', style: TextStyle(fontWeight: FontWeight.bold)),
+>>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
                         const SizedBox(height: 16),
                         _buildTimeline(concern.status),
                       ],
@@ -159,3 +167,7 @@ class StudentDashboard extends ConsumerWidget {
     }
   }
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
