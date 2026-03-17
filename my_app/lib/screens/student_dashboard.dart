@@ -3,34 +3,41 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../models/concern.dart';
 import '../services/concern_service.dart';
-<<<<<<< HEAD
 import '../services/providers.dart';
 import 'concern_detail_screen.dart';
-=======
-import 'login_screen.dart';
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
-
+import 'ai_admin_contact.dart';
 
 final studentConcernsProvider = StreamProvider.family<List<Concern>, String>((ref, studentId) {
   return ref.watch(concernServiceProvider).getConcernsByStudent(studentId);
 });
 
-
 class StudentDashboard extends ConsumerWidget {
   const StudentDashboard({super.key});
-
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentStudentId = ref.watch(userIdProvider) ?? 'anonymous';
     final concernsAsync = ref.watch(studentConcernsProvider(currentStudentId));
 
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Concerns'),
         backgroundColor: Colors.red,
         foregroundColor: Colors.white,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.support_agent),
+            tooltip: "Contact AI Admin",
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AIAdminContact(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: concernsAsync.when(
         data: (concerns) => concerns.isEmpty
@@ -67,7 +74,6 @@ class StudentDashboard extends ConsumerWidget {
                         const SizedBox(height: 8),
                         Text('Submitted on: ${DateFormat('MMM dd, yyyy HH:mm').format(concern.createdAt)}'),
                         const Divider(),
-<<<<<<< HEAD
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -90,9 +96,6 @@ class StudentDashboard extends ConsumerWidget {
                             ),
                           ],
                         ),
-=======
-                        const Text('Progress Timeline:', style: TextStyle(fontWeight: FontWeight.bold)),
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
                         const SizedBox(height: 16),
                         _buildTimeline(concern.status),
                       ],
@@ -109,11 +112,9 @@ class StudentDashboard extends ConsumerWidget {
     );
   }
 
-
   Widget _buildTimeline(ConcernStatus currentStatus) {
     // Filter out 'escalated' status from the timeline
     final statuses = ConcernStatus.values.where((s) => s != ConcernStatus.escalated).toList();
-
 
     return Column(
       children: statuses.map((s) {
@@ -155,7 +156,6 @@ class StudentDashboard extends ConsumerWidget {
     );
   }
 
-
   IconData _getStatusIcon(ConcernStatus status) {
     switch (status) {
       case ConcernStatus.submitted: return Icons.send;
@@ -167,7 +167,3 @@ class StudentDashboard extends ConsumerWidget {
     }
   }
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2

@@ -1,23 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../main.dart';
-<<<<<<< HEAD
 import '../services/providers.dart';
-=======
-
-
-final userRoleProvider = StateProvider<String?>((ref) => null);
-final userIdProvider = StateProvider<String?>((ref) => null);
-
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
 
 class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
@@ -73,20 +61,12 @@ class LoginScreen extends ConsumerWidget {
   }
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
 class _LoginButton extends StatelessWidget {
   final String label;
   final IconData icon;
   final VoidCallback onPressed;
   final bool isPrimary;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
   const _LoginButton({
     required this.label,
     required this.icon,
@@ -94,10 +74,6 @@ class _LoginButton extends StatelessWidget {
     this.isPrimary = false,
   });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -118,7 +94,3 @@ class _LoginButton extends StatelessWidget {
     );
   }
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2

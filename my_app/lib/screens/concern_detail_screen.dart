@@ -6,60 +6,32 @@ import '../models/comment.dart';
 import '../services/concern_service.dart';
 import 'package:intl/intl.dart';
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
 class ConcernDetailScreen extends ConsumerStatefulWidget {
   final Concern concern;
   final bool isAdmin;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
   const ConcernDetailScreen({
     super.key,
     required this.concern,
     this.isAdmin = false,
   });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
   @override
   ConsumerState<ConcernDetailScreen> createState() => _ConcernDetailScreenState();
 }
 
-<<<<<<< HEAD
 class _ConcernDetailScreenState extends ConsumerState<ConcernDetailScreen> {
   final _commentController = TextEditingController();
 
-=======
-
-class _ConcernDetailScreenState extends ConsumerState<ConcernDetailScreen> {
-  final _commentController = TextEditingController();
-
-
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
   @override
   void dispose() {
     _commentController.dispose();
     super.dispose();
   }
 
-<<<<<<< HEAD
   void _sendComment() async {
     if (_commentController.text.trim().isEmpty) return;
 
-=======
-
-  void _sendComment() async {
-    if (_commentController.text.trim().isEmpty) return;
-
-
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
     final comment = Comment(
       id: const Uuid().v4(),
       concernId: widget.concern.id,
@@ -69,15 +41,10 @@ class _ConcernDetailScreenState extends ConsumerState<ConcernDetailScreen> {
       timestamp: DateTime.now(),
     );
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
     await ref.read(concernServiceProvider).addComment(comment);
     _commentController.clear();
   }
 
-<<<<<<< HEAD
   void _updateStatus(ConcernStatus status) async {
     await ref.read(concernServiceProvider).updateStatus(widget.concern.id, status, 'admin_user');
     if (mounted) {
@@ -86,35 +53,19 @@ class _ConcernDetailScreenState extends ConsumerState<ConcernDetailScreen> {
       );
     }
   }
-=======
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
 
   @override
   Widget build(BuildContext context) {
     final commentsStream = ref.watch(concernServiceProvider).getComments(widget.concern.id);
 
-<<<<<<< HEAD
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.concern.id.substring(0, 8).toUpperCase()),
-=======
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.concern.title),
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
         backgroundColor: Colors.red,
         foregroundColor: Colors.white,
       ),
       body: Column(
         children: [
-<<<<<<< HEAD
-          // Basic Info Header
-          _buildConcernHeader(),
-          
-          // Chat Area
-=======
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
           Expanded(
             child: StreamBuilder<List<Comment>>(
               stream: commentsStream,
@@ -122,18 +73,6 @@ class _ConcernDetailScreenState extends ConsumerState<ConcernDetailScreen> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator(color: Colors.red));
                 }
-<<<<<<< HEAD
-                final comments = snapshot.data ?? [];
-                if (comments.isEmpty) {
-                  return const Center(child: Text('No messages yet.', style: TextStyle(color: Colors.grey)));
-                }
-                return ListView.builder(
-                  padding: const EdgeInsets.all(16),
-                  itemCount: comments.length,
-                  itemBuilder: (context, index) {
-                    final comment = comments[index];
-                    final isMe = comment.senderId == (widget.isAdmin ? 'admin_id' : widget.concern.studentId);
-=======
 
                 final comments = snapshot.data ?? [];
 
@@ -147,45 +86,20 @@ class _ConcernDetailScreenState extends ConsumerState<ConcernDetailScreen> {
                     final comment = comments[index - 1];
                     final isMe = comment.senderId == (widget.isAdmin ? 'admin_id' : widget.concern.studentId);
 
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
                     return _buildCommentBubble(comment, isMe);
                   },
                 );
               },
             ),
           ),
-<<<<<<< HEAD
-
-          // Message Input
+          
           _buildCommentInput(),
-
-          // Admin Status Choices (If Admin)
+          
           if (widget.isAdmin) _buildAdminStatusActions(),
-=======
-          _buildCommentInput(),
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
         ],
       ),
     );
   }
-
-<<<<<<< HEAD
-  Widget _buildConcernHeader() {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.grey[50],
-        border: Border(bottom: BorderSide(color: Colors.grey[200]!)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(widget.concern.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-          const SizedBox(height: 4),
-          Text(widget.concern.description, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 13, color: Colors.black54)),
-        ],
-=======
 
   Widget _buildConcernInfo() {
     return Card(
@@ -195,22 +109,17 @@ class _ConcernDetailScreenState extends ConsumerState<ConcernDetailScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Category: \${widget.concern.category.name.toUpperCase()}', style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text('Category: ${widget.concern.category.name.toUpperCase()}', style: const TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Text(widget.concern.description),
             const Divider(height: 24),
             const Text('Interaction History', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.red)),
           ],
         ),
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
       ),
     );
   }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
   Widget _buildCommentBubble(Comment comment, bool isMe) {
     return Align(
       alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
@@ -218,7 +127,6 @@ class _ConcernDetailScreenState extends ConsumerState<ConcernDetailScreen> {
         margin: const EdgeInsets.symmetric(vertical: 4),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-<<<<<<< HEAD
           color: isMe ? Colors.red : Colors.grey[200],
           borderRadius: BorderRadius.circular(12),
         ),
@@ -234,25 +142,6 @@ class _ConcernDetailScreenState extends ConsumerState<ConcernDetailScreen> {
             Text(
               DateFormat('HH:mm').format(comment.timestamp),
               style: TextStyle(fontSize: 9, color: isMe ? Colors.white70 : Colors.grey),
-=======
-          color: isMe ? Colors.red.shade100 : Colors.grey.shade200,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.7),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              comment.senderName,
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: isMe ? Colors.red : Colors.black54),
-            ),
-            const SizedBox(height: 4),
-            Text(comment.message),
-            const SizedBox(height: 4),
-            Text(
-              DateFormat('HH:mm').format(comment.timestamp),
-              style: const TextStyle(fontSize: 10, color: Colors.grey),
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
             ),
           ],
         ),
@@ -260,38 +149,36 @@ class _ConcernDetailScreenState extends ConsumerState<ConcernDetailScreen> {
     );
   }
 
-<<<<<<< HEAD
-  Widget _buildCommentInput() {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(color: Colors.white, border: Border(top: BorderSide(color: Colors.grey[200]!))),
-=======
-
   Widget _buildCommentInput() {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 5)],
+        border: Border(top: BorderSide(color: Colors.grey[200]!)),
       ),
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
       child: Row(
         children: [
           Expanded(
             child: TextField(
               controller: _commentController,
-<<<<<<< HEAD
-              decoration: const InputDecoration(hintText: 'Type your message...', border: InputBorder.none, contentPadding: EdgeInsets.symmetric(horizontal: 16)),
+              decoration: const InputDecoration(
+                hintText: 'Type your message...',
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.symmetric(horizontal: 16),
+              ),
             ),
           ),
-          IconButton(icon: const Icon(Icons.send, color: Colors.red), onPressed: _sendComment),
+          IconButton(
+            icon: const Icon(Icons.send, color: Colors.red),
+            onPressed: _sendComment,
+          ),
         ],
       ),
     );
   }
 
   Widget _buildAdminStatusActions() {
-    // Only show relevant status updates for admin
     final statuses = [
       ConcernStatus.read,
       ConcernStatus.screened,
@@ -319,25 +206,9 @@ class _ConcernDetailScreenState extends ConsumerState<ConcernDetailScreen> {
                 ),
               )).toList(),
             ),
-=======
-              decoration: const InputDecoration(
-                hintText: 'Type your message...',
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.symmetric(horizontal: 16),
-              ),
-            ),
-          ),
-          IconButton(
-            icon: const Icon(Icons.send, color: Colors.red),
-            onPressed: _sendComment,
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
           ),
         ],
       ),
     );
   }
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2

@@ -6,10 +6,7 @@ import 'screens/student_form.dart';
 import 'screens/student_dashboard.dart';
 import 'screens/admin_dashboard.dart';
 import 'screens/login_screen.dart';
-<<<<<<< HEAD
 import 'services/providers.dart';
-=======
->>>>>>> c3e067d78a3dd4cf7368b66f56c38a2e71ca3da2
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
